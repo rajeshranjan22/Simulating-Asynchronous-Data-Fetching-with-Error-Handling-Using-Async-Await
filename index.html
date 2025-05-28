@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Simulation</title>
+</head>
+
+<body>
+    <h1>Simulating Data Fetch</h1>
+    <button onclick="fetchDataHandler()">Fetch Data</button>
+    <p id="result"></p>
+
+    <script>
+        function fetchData() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const success = Math.random() > 0.5;
+                    if (success) {
+                        resolve("Fetched data successfully!");
+                    } else {
+                        reject("Network error or server issue");
+                    }
+                }, 1000);
+            });
+        }
+
+        async function fetchDataHandler() {
+            const resultElement = document.getElementById("result");
+            resultElement.textContent = "Fetching...";
+            try {
+                const result = await fetchData();
+                resultElement.textContent = result;
+            } catch (error) {
+                resultElement.textContent = "Error fetching data: " + error;
+            }
+        }
+    </script>
+</body>
+
+</html>
